@@ -27,6 +27,20 @@
         <div class="site-overview-wrap sidebar-panel">
           {{ partial('_partials/sidebar/site-overview.njk', {}, {cache: theme.cache.enable}) }}
 
+          <div class="recent-posts">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-history fa-fw"></i> Recent Posts
+            </div>
+            <ul class="recent-posts-list">
+              {% set posts = site.posts.sort('-date').limit(10).toArray() %}
+              {% for post in posts %}
+                <li class="recent-posts-item">
+                  <a href="{{ url_for(post.path) }}" title="{{ post.title }}">{{ post.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
           {{- next_inject('sidebar') }}
         </div>
       </div>
